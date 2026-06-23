@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://bechirdardouri.github.io/</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://bechirdardouri.github.io/images/profile-final.jpg</image:loc>
+      <image:title>Bechir Dardouri</image:title>
+      <image:caption>ML researcher — efficient reasoning, vision-language models, medical AI</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://bechirdardouri.github.io/images/sailing.jpg</image:loc>
+      <image:title>Bechir Dardouri racing sailboat</image:title>
+      <image:caption>Member of the Tunisian national sailing team</image:caption>
+    </image:image>
+  </url>
+</urlset>

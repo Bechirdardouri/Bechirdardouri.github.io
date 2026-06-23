@@ -75,55 +75,92 @@
     reset(initial = false) {
       this.x = Math.random() * window.innerWidth;
       this.y = Math.random() * window.innerHeight;
-      this.size = 3 + Math.random() * 11;
+      // Elegant size distribution: mostly small, rare larger ones
+      const sizeRoll = Math.random();
+      this.size = sizeRoll < 0.7
+        ? 2 + Math.random() * 4     // small & subtle (most)
+        : sizeRoll < 0.93
+          ? 6 + Math.random() * 4   // medium
+          : 10 + Math.random() * 4; // rare larger accent
       this.color = palette[Math.floor(Math.random() * palette.length)];
-      this.baseOpacity = 0.18 + Math.random() * 0.45;
+      this.baseOpacity = this.size < 6
+        ? 0.12 + Math.random() * 0.25
+        : 0.08 + Math.random() * 0.2;
       this.opacity = initial ? this.baseOpacity : 0;
       this.targetOpacity = this.baseOpacity;
-      this.vx = (Math.random() - 0.5) * 0.18;
-      this.vy = (Math.random() - 0.5) * 0.18;
+      // Slower, more graceful drift
+      this.vx = (Math.random() - 0.5) * 0.10;
+      this.vy = (Math.random() - 0.5) * 0.10;
       this.phase = Math.random() * Math.PI * 2;
-      this.phaseSpeed = 0.003 + Math.random() * 0.005;
-      this.swayX = 0.4 + Math.random() * 0.8;
-      this.swayY = 0.3 + Math.random() * 0.6;
+      this.phaseSpeed = 0.0018 + Math.random() * 0.003;
+      // Compound sway for elegant non-repeating motion
+      this.phase2 = Math.random() * Math.PI * 2;
+      this.phaseSpeed2 = 0.001 + Math.random() * 0.002;
+      this.swayX = 0.3 + Math.random() * 0.6;
+      this.swayY = 0.25 + Math.random() * 0.5;
       this.rotation = Math.random() * Math.PI;
-      this.rotationSpeed = (Math.random() - 0.5) * 0.004;
+      this.rotationSpeed = (Math.random() - 0.5) * 0.0025;
       this.pushX = 0;
       this.pushY = 0;
+      // Breathing scale animation
+      this.breathPhase = Math.random() * Math.PI * 2;
+      this.breathSpeed = 0.008 + Math.random() * 0.012;
+      // 20% of particles have a soft glow
+      this.glow = Math.random() < 0.2;
     }
     update() {
       this.phase += this.phaseSpeed;
-      this.x += this.vx + Math.cos(this.phase) * 0.06 * this.swayX;
-      this.y += this.vy + Math.sin(this.phase * 0.8) * 0.06 * this.swayY;
+      this.phase2 += this.phaseSpeed2;
+      this.breathPhase += this.breathSpeed;
+
+      // Compound sinuous motion (two sine waves layered)
+      this.x += this.vx
+        + Math.cos(this.phase) * 0.05 * this.swayX
+        + Math.sin(this.phase2 * 1.3) * 0.03 * this.swayX;
+      this.y += this.vy
+        + Math.sin(this.phase * 0.8) * 0.05 * this.swayY
+        + Math.cos(this.phase2 * 1.1) * 0.03 * this.swayY;
+
       if (mouse.active) {
         const dx = this.x - mouse.x;
         const dy = this.y - mouse.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        const radius = 140;
+        const radius = 110;
         if (dist < radius && dist > 0.1) {
-          const force = (1 - dist / radius) * 1.4;
+          const force = (1 - dist / radius) * 0.9;
           this.pushX += (dx / dist) * force;
           this.pushY += (dy / dist) * force;
         }
       }
-      this.pushX *= 0.88;
-      this.pushY *= 0.88;
+      this.pushX *= 0.9;
+      this.pushY *= 0.9;
       this.rotation += this.rotationSpeed;
+
       const m = 30;
       if (this.x < -m) this.x = window.innerWidth + m;
       if (this.x > window.innerWidth + m) this.x = -m;
       if (this.y < -m) this.y = window.innerHeight + m;
       if (this.y > window.innerHeight + m) this.y = -m;
+
       this.opacity += (this.targetOpacity - this.opacity) * 0.04;
     }
     draw() {
       const drawX = this.x + this.pushX;
       const drawY = this.y + this.pushY;
+      // Breathing scale — subtle 0.85x ↔ 1.0x
+      const breathScale = 0.85 + 0.15 * (0.5 + 0.5 * Math.sin(this.breathPhase));
       ctx.save();
       ctx.translate(drawX, drawY);
       ctx.rotate(this.rotation);
-      ctx.globalAlpha = this.opacity;
+      ctx.scale(breathScale, breathScale);
+      ctx.globalAlpha = this.opacity * (0.7 + 0.3 * (0.5 + 0.5 * Math.sin(this.breathPhase)));
       ctx.fillStyle = this.color;
+
+      if (this.glow) {
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur = this.size * 1.8;
+      }
+
       const r = Math.min(1.5, this.size * 0.18);
       const s = this.size;
       ctx.beginPath();
@@ -146,7 +183,8 @@
     if (!canvas) return;
     particles = [];
     const area = window.innerWidth * window.innerHeight;
-    const count = Math.min(56, Math.max(24, Math.floor(area / 28000)));
+    // Fewer particles, more elegant — max 34, min 18
+    const count = Math.min(34, Math.max(18, Math.floor(area / 48000)));
     for (let i = 0; i < count; i++) particles.push(new Pixel());
   }
 
