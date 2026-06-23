@@ -55,8 +55,18 @@
   let dpr = Math.min(window.devicePixelRatio || 1, 2);
 
   const palette = [
-    '#b85029', '#5d7a5f', '#4a6b8a', '#c89738',
-    '#8e5d6f', '#2a2a2a', '#a8967a',
+    '#b85029', '#c89738', '#5d7a5f', '#4a6b8a',
+    '#8e5d6f', '#a8967a', '#2a2a2a',
+  ];
+
+  // Soft pastel layer (used by ~30% of particles) for elegance
+  const softPalette = [
+    'rgba(184, 80, 41, 0.55)',   // rust soft
+    'rgba(200, 151, 56, 0.55)',  // mustard soft
+    'rgba(93, 122, 95, 0.55)',   // sage soft
+    'rgba(74, 107, 138, 0.55)',  // blue soft
+    'rgba(142, 93, 111, 0.55)',  // mauve soft
+    'rgba(168, 150, 122, 0.55)', // taupe soft
   ];
 
   function sizeCanvas() {
@@ -77,36 +87,39 @@
       this.y = Math.random() * window.innerHeight;
       // Elegant size distribution: mostly small, rare larger ones
       const sizeRoll = Math.random();
-      this.size = sizeRoll < 0.7
-        ? 2 + Math.random() * 4     // small & subtle (most)
-        : sizeRoll < 0.93
-          ? 6 + Math.random() * 4   // medium
-          : 10 + Math.random() * 4; // rare larger accent
-      this.color = palette[Math.floor(Math.random() * palette.length)];
+      this.size = sizeRoll < 0.65
+        ? 2 + Math.random() * 3.5     // small & subtle (most)
+        : sizeRoll < 0.9
+          ? 5.5 + Math.random() * 3.5 // medium
+          : 9 + Math.random() * 5;    // rare larger accent
+      // 35% of particles use the soft pastel palette for elegance
+      this.soft = Math.random() < 0.35;
+      const pal = this.soft ? softPalette : palette;
+      this.color = pal[Math.floor(Math.random() * pal.length)];
       this.baseOpacity = this.size < 6
-        ? 0.12 + Math.random() * 0.25
-        : 0.08 + Math.random() * 0.2;
+        ? 0.22 + Math.random() * 0.35
+        : 0.15 + Math.random() * 0.3;
       this.opacity = initial ? this.baseOpacity : 0;
       this.targetOpacity = this.baseOpacity;
       // Slower, more graceful drift
-      this.vx = (Math.random() - 0.5) * 0.10;
-      this.vy = (Math.random() - 0.5) * 0.10;
+      this.vx = (Math.random() - 0.5) * 0.09;
+      this.vy = (Math.random() - 0.5) * 0.09;
       this.phase = Math.random() * Math.PI * 2;
-      this.phaseSpeed = 0.0018 + Math.random() * 0.003;
+      this.phaseSpeed = 0.0018 + Math.random() * 0.0028;
       // Compound sway for elegant non-repeating motion
       this.phase2 = Math.random() * Math.PI * 2;
-      this.phaseSpeed2 = 0.001 + Math.random() * 0.002;
-      this.swayX = 0.3 + Math.random() * 0.6;
-      this.swayY = 0.25 + Math.random() * 0.5;
+      this.phaseSpeed2 = 0.001 + Math.random() * 0.0018;
+      this.swayX = 0.28 + Math.random() * 0.55;
+      this.swayY = 0.22 + Math.random() * 0.45;
       this.rotation = Math.random() * Math.PI;
-      this.rotationSpeed = (Math.random() - 0.5) * 0.0025;
+      this.rotationSpeed = (Math.random() - 0.5) * 0.0022;
       this.pushX = 0;
       this.pushY = 0;
       // Breathing scale animation
       this.breathPhase = Math.random() * Math.PI * 2;
-      this.breathSpeed = 0.008 + Math.random() * 0.012;
-      // 20% of particles have a soft glow
-      this.glow = Math.random() < 0.2;
+      this.breathSpeed = 0.006 + Math.random() * 0.012;
+      // 22% of particles have a soft glow
+      this.glow = Math.random() < 0.22;
     }
     update() {
       this.phase += this.phaseSpeed;
@@ -183,8 +196,8 @@
     if (!canvas) return;
     particles = [];
     const area = window.innerWidth * window.innerHeight;
-    // Fewer particles, more elegant — max 34, min 18
-    const count = Math.min(34, Math.max(18, Math.floor(area / 48000)));
+    // Elegant density: max 38, min 20
+    const count = Math.min(38, Math.max(20, Math.floor(area / 42000)));
     for (let i = 0; i < count; i++) particles.push(new Pixel());
   }
 
