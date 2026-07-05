@@ -455,7 +455,7 @@ table.hero td {
 .portrait {
   position: relative;
   display: inline-block;
-  width: clamp(210px, 24vw, 290px);
+  width: clamp(260px, 30vw, 360px);
   aspect-ratio: 1;
   will-change: transform;
 }
@@ -463,15 +463,16 @@ table.hero td {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 50% 30%;
   border-radius: 50%;
-  filter: saturate(0.85) contrast(0.96);
-  -webkit-mask-image: radial-gradient(circle, #000 60%, transparent 92%);
-  mask-image: radial-gradient(circle, #000 60%, transparent 92%);
+  filter: saturate(0.92) contrast(1.02);
+  -webkit-mask-image: radial-gradient(circle, #000 64%, transparent 94%);
+  mask-image: radial-gradient(circle, #000 64%, transparent 94%);
   transition: filter 600ms var(--ease), transform 1200ms var(--ease);
   display: block;
 }
 .portrait:hover .profile-pic {
-  filter: saturate(1.05) contrast(1.02);
+  filter: saturate(1.05) contrast(1.05);
   transform: scale(1.04);
 }
 .portrait__ring {
