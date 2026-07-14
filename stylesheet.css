@@ -8,14 +8,14 @@
    ============================================================ */
 
 :root {
-  --bg:          #f6f2ea;
-  --bg-soft:     #efe9dd;
-  --bg-deep:     #ece5d6;
+  --bg:          #fbfbfa;
+  --bg-soft:     #f5f5f2;
+  --bg-deep:     #efefeb;
   --ink:         #18181b;
   --ink-2:       #3f3f46;
   --muted:       #8a8478;
-  --hairline:    #d9d1bf;
-  --hairline-2:  #e6dfd0;
+  --hairline:    #deded8;
+  --hairline-2:  #ebebe6;
 
   --link:        #1a5a8a;
   --link-hover:  #b85029;
@@ -90,17 +90,7 @@ body {
 
 /* Paper grain — warm ambient layers */
 body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background-image:
-    radial-gradient(ellipse 75% 55% at 12% 8%, rgba(200, 151, 56, 0.09), transparent 60%),
-    radial-gradient(ellipse 70% 50% at 88% 92%, rgba(74, 107, 138, 0.07), transparent 60%),
-    radial-gradient(ellipse 60% 40% at 50% 50%, rgba(184, 80, 41, 0.035), transparent 70%),
-    radial-gradient(ellipse 50% 35% at 25% 80%, rgba(142, 93, 111, 0.04), transparent 60%);
-  mix-blend-mode: multiply;
+  content: none;
 }
 
 /* ---------- Reading progress bar ---------- */
@@ -171,14 +161,14 @@ body::before {
   align-items: center;
   justify-content: space-between;
   padding: 1.25rem 2rem;
-  background: linear-gradient(to bottom, rgba(246, 242, 234, 0.95), rgba(246, 242, 234, 0));
+  background: linear-gradient(to bottom, rgba(251, 251, 250, 0.97), rgba(251, 251, 250, 0));
   transition: padding 300ms var(--ease), background 300ms var(--ease),
               border-color 300ms var(--ease);
   border-bottom: 1px solid transparent;
 }
 .site-nav.is-scrolled {
   padding: 0.85rem 2rem;
-  background: rgba(246, 242, 234, 0.88);
+  background: rgba(251, 251, 250, 0.9);
   border-bottom-color: var(--hairline);
   backdrop-filter: saturate(140%) blur(12px);
   -webkit-backdrop-filter: saturate(140%) blur(12px);
