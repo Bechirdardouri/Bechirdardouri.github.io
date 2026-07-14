@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light" />
-    <meta name="theme-color" content="#f6f2ea" />
+    <meta name="theme-color" content="#f7f6f2" />
 
     <!-- Primary SEO -->
     <title>Bechir Dardouri · ML Researcher · Tübingen AI Center</title>
@@ -51,7 +51,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" /></noscript>
 
-    <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="minimal.css" />
 
     <!-- Structured data: Person -->
     <script type="application/ld+json">
@@ -121,21 +121,7 @@
       "inLanguage": "en"
     }
     </script>
-
-    <!-- Google Analytics (GA4): replace G-XXXXXXXXXX with your Measurement ID -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX', {
-        'anonymize_ip': true,
-        'page_title': document.title,
-        'page_location': window.location.href
-      });
-    </script>
-    <!-- End Google Analytics -->
-  </head>
+</head>
 
   <body>
     <a href="#main" class="skip-link">Skip to content</a>
@@ -381,7 +367,7 @@
                 <h2 class="section-h">Writing</h2>
                 <span class="section-h__line" aria-hidden="true"></span>
               </header>
-              <p class="section-hint">Notes on efficient reasoning, post-training, and the engineering of intelligence.</p>
+              <p class="section-hint">Occasional notes on model architecture, efficiency, and research practice.</p>
 
               <table class="papers" role="presentation">
                 <tbody>
@@ -402,7 +388,7 @@
                           <line x1="65" y1="65" x2="95" y2="65" stroke="#8e5d6f" stroke-width="1"/>
                           <line x1="65" y1="80" x2="105" y2="80" stroke="#8e5d6f" stroke-width="1"/>
                           <text x="85" y="120" font-family="JetBrains Mono, monospace" font-size="6"
-                                fill="#8e5d6f" text-anchor="middle" letter-spacing="2">ESSAY · DRAFTING</text>
+                                fill="#8e5d6f" text-anchor="middle" letter-spacing="2">ESSAY · NOTION</text>
                         </svg>
                       </div>
                     </td>
@@ -412,59 +398,20 @@
                       </div>
                       <a href="https://app.notion.com/p/Spending-the-Budget-The-Architecture-Decisions-That-Actually-Move-the-Needle-39b4e659361080c39e27ff9a5241f65d" target="_blank" rel="noopener"><span class="papertitle">Spending the Budget: The Architecture Decisions That Actually Move the Needle</span></a>
                       <p class="paper-abstract">
-                        On the design space of verifiable rewards: what we choose to
-                        grade a model on shapes what it optimizes for, and what it
-                        quietly discards along the way.
+                        A practical look at the architecture choices that determine where a language model spends its parameters, memory, and compute.
                       </p>
                       <div class="paper__tag-row">
-                        <span class="paper-tag">post-training</span>
-                        <span class="paper-tag">rl</span>
-                        <span class="paper-tag">philosophy</span>
+                        <span class="paper-tag">architecture</span>
+                        <span class="paper-tag">language models</span>
+                        <span class="paper-tag">efficiency</span>
                       </div>
                     </td>
                   </tr>
 
-                  <tr class="paper">
-                    <td class="paper__thumb">
-                      <div class="thumb thumb--sage" aria-hidden="true">
-                        <svg viewBox="0 0 170 130" xmlns="http://www.w3.org/2000/svg">
-                          <rect width="170" height="130" fill="url(#g2)"/>
-                          <rect x="40" y="25" width="90" height="80" fill="#fff" stroke="#5d7a5f" stroke-width="1.2"/>
-                          <line x1="50" y1="40" x2="100" y2="40" stroke="#5d7a5f" stroke-width="1"/>
-                          <line x1="50" y1="50" x2="120" y2="50" stroke="#5d7a5f" stroke-width="1"/>
-                          <line x1="50" y1="60" x2="115" y2="60" stroke="#5d7a5f" stroke-width="1"/>
-                          <line x1="50" y1="70" x2="120" y2="70" stroke="#5d7a5f" stroke-width="1"/>
-                          <line x1="50" y1="80" x2="105" y2="80" stroke="#5d7a5f" stroke-width="1"/>
-                          <line x1="50" y1="90" x2="118" y2="90" stroke="#5d7a5f" stroke-width="1"/>
-                          <text x="85" y="120" font-family="JetBrains Mono, monospace" font-size="6"
-                                fill="#5d7a5f" text-anchor="middle" letter-spacing="2">NOTES · PLANNED</text>
-                        </svg>
-                      </div>
-                    </td>
-                    <td class="paper__body">
-                      <div class="paper__meta-row">
-                        <span class="paper__date">Planned · May 2026</span>
-                      </div>
-                      <span class="papertitle">Token Compression Without Regret</span>
-                      <p class="paper-abstract">
-                        Notes from the Tübingen AI Center on keeping compressed
-                        representations faithful to fine-grained reasoning, a
-                        practical guide to scaling perceptual context without
-                        scaling sequence length.
-                      </p>
-                      <div class="paper__tag-row">
-                        <span class="paper-tag">vlms</span>
-                        <span class="paper-tag">efficiency</span>
-                        <span class="paper-tag">research</span>
-                      </div>
-                    </td>
-                  </tr>
+                  
 
                 </tbody>
               </table>
-              <p class="writing-cta">
-                <a href="#contact">Get notified when the first post lands →</a>
-              </p>
             </section>
 
             <hr class="divider" />
